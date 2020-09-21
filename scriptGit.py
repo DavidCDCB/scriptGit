@@ -71,7 +71,7 @@ def acciones(opt):
 		os.system("git status -sb")
 		message=input("\nDescripción del cambio > ")
 		os.system("git add .")
-		os.system("git commit -a -m '"+str(message)+"'")
+		os.system("git commit -a -m "+str(message))
 		limpiar()
 		os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd")
 		input()
