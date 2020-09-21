@@ -34,9 +34,9 @@ def menu():
 	print("[1] Clonar proyecto")
 	print("[2] Crear cambio")
 	print("[3] Comparar Local vs Remoto")
-	print("[4] Adquirir cambios remotos")
+	print("[4] Fusionar Rama")
 	print("[5] Ver historial y estado")
-	print("[6] Subir cambios locales")
+	print("[6] Subir ramas locales")
 	print("[7] Ir a Commit o Rama")
 	print("[8] Crear rama")
 	print("[9] Deshacer ultimo commit")		
@@ -63,17 +63,19 @@ def acciones(opt):
 		exit()
 		
 	if(opt is "2"):
+		'''
 		print(" Integrando cambios remotos:\n")
 		os.system("git fetch")
 		os.system("git log --all --abbrev-commit master..origin/master")
 		os.system("git merge")
+		'''
 		print("\nCambios a confirmar...\n")
 		os.system("git status -sb")
 		message=input("\nDescripción del cambio > ")
 		os.system("git add .")
 		os.system("git commit -a -m '"+str(message)+"'")
 		limpiar()
-		os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd")
+		os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd'")
 		input()
 		
 	if(opt is "3"):
@@ -88,7 +90,8 @@ def acciones(opt):
 		
 	if(opt is "4"):
 		os.system("git fetch")
-		os.system("git merge")
+		rama=input("Rama a traer > ")
+		os.system("git merge "+str(rama))
 		input()
 		
 	if(opt is "5"):
@@ -97,6 +100,7 @@ def acciones(opt):
 			os.system("git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit")
 		else:
 			os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd")
+		input()
 		limpiar()
 		print("\n Ramas:\n")
 		os.system("git branch -v")
@@ -112,7 +116,6 @@ def acciones(opt):
 		input()
 
 	if(opt is "7"):
-		os.system("git log --graph --oneline --decorate --all")
 		print("\nRamas:\n")
 		os.system("git branch -v")
 		idCommit=input("Id del Commit o Rama > ")
