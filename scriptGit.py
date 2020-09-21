@@ -40,7 +40,7 @@ def menu():
 	print("[7] Ir a Commit o Rama")
 	print("[8] Crear rama")
 	print("[9] Deshacer ultimo commit")		
-	acciones(input("Opción> "))
+	acciones(input("Opción > "))
 
 def acciones(opt):
 	limpiar()
@@ -75,9 +75,9 @@ def acciones(opt):
 		os.system("git add .")
 		os.system("git commit -a -m '"+str(message)+"'")
 		limpiar()
-		os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd'")
+		os.system("git log -3 --graph --decorate --all --abbrev-commit")
 		input()
-		
+			
 	if(opt is "3"):
 		limpiar()
 		os.system("git fetch")
@@ -96,11 +96,9 @@ def acciones(opt):
 		input()
 		
 	if(opt is "5"):
+		os.system("git fetch")
 		limpiar()
-		if(sys.platform.startswith('linux')):
-			os.system("git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit")
-		else:
-			os.system("git log --graph --decorate --all --abbrev-commit --pretty=format:'%h - %s -> %an - %cd")
+		os.system('git log --graph --pretty=format:"%C(cyan)%h%Creset -> %an -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset" --abbrev-commit')
 		input()
 		limpiar()
 		print("\n Ramas:\n")
